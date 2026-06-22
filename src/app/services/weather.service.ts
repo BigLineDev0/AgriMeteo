@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../environnements/env';
+import { environment } from '../../env';
 
 
 @Injectable({
@@ -17,7 +17,5 @@ export class MeteoService {
             `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${this.apiKey}&units=metric&lang=fr`
         )
     }
-
-
 
 }
