@@ -1,5 +1,206 @@
-<div class="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
-  
-  <p class="text-sm font-medium text-gray-800 px-5 pt-4 pb-2">Données Météo</p>
+<!-- @if(weatherInfo){ -->
+<!-- Header -->
+<div class="max-w-3xl bg-white rounded-2xl shadow overflow-hidden">
+    <div class="bg-gradient-to-r from-green-900 to-green-700 text-white p-5">
+        <!-- Haut -->
+        <div class="flex justify-between items-start">
+
+            <div>
+                <div class="flex items-center gap-2 text-[11px] uppercase tracking-[3px] text-green-200">
+
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Région sélectionnée</span>
+
+                </div>
+
+                <h2 class="text-3xl font-bold mt-1">
+                    <!-- {{ weatherInfo.region }} -->
+                      dakar
+                </h2>
+
+                <p class="text-sm text-green-100 mt-1">
+                    <!-- Sénégal - Mise à jour à {{ weatherInfo.weather.dt * 1000 | date:'HH:mm' }} -->
+                    Sénégal - Mise à jour à 12:00
+                </p>
+
+            </div>
+
+            <!-- Meteo -->
+            <div class="flex flex-col items-end">
+
+                <!-- <img class="w-16 h-16"
+                    [src]="'https://openweathermap.org/img/wn/' + weatherInfo.weather.weather[0].icon + '@2x.png'"
+                    alt="Météo"> -->
+                  <i class="fas fa-sun text-4xl text-yellow-500"></i>
+
+                <p class="text-sm text-green-100 capitalize -mt-1">
+                    <!-- {{ weatherInfo.weather.weather[0].description }} -->
+                    Ensoleillé
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- Température -->
+        <div class="flex items-center gap-6 mt-6">
+
+            <h3 class="text-6xl font-bold leading-none">
+                <!-- {{ weatherInfo.weather.main.temp | number:'1.0-0' }}° -->
+                  30°
+            </h3>
+
+            <div class="space-y-1">
+
+                <p class="text-green-100 text-sm">
+                    Ressenti
+                    <!-- {{ weatherInfo.weather.main.feels_like | number:'1.0-0' }}° -->
+                    32°
+                </p>
+
+                <p class="text-green-100 text-sm">
+                    Humidité
+                    <!-- {{ weatherInfo.weather.main.humidity }}% -->
+                    23
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Statistiques -->
+    <div class="p-4">
+
+        <div class="grid grid-cols-2 gap-3">
+
+            <!-- Humidité -->
+            <div class="border border-gray-300 rounded-xl p-4 bg-gray-50 hover:bg-gray-100 transition">
+
+                <p class="text-xs text-gray-500 mb-2">
+                    <i class="fas fa-tint"></i> Humidité
+                </p>
+
+                <h4 class="text-2xl font-bold text-gray-800">
+                    <!-- {{ weatherInfo.weather.main.humidity || '--' }} -->
+                      23
+                    <span class="text-base font-normal">%</span>
+                </h4>
+
+            </div>
+
+            <!-- Vent -->
+            <div class="border border-gray-300 rounded-xl p-4 bg-gray-50 hover:bg-gray-100 transition">
+
+                <p class="text-xs text-gray-500 mb-2">
+                    <i class="fas fa-wind"></i> Vent
+                </p>
+
+                <h4 class="text-2xl font-bold text-gray-800">
+                    <!-- {{ weatherInfo.weather.wind.speed || '--' }} -->
+                      20
+                    <span class="text-base font-normal">km/h</span>
+                </h4>
+
+            </div>
+
+            <!-- Précipitations -->
+            <div class="border border-gray-300 rounded-xl p-4 bg-gray-50 hover:bg-gray-100 transition">
+
+                <p class="text-xs text-gray-500 mb-2">
+                    <i class="fas fa-cloud-rain"></i> Précip.
+                </p>
+
+                <h4 class="text-2xl font-bold text-gray-800">
+                    <!-- {{ weatherInfo.weather.rain?.['1h'] || '--' }} -->
+                    23
+                    <span class="text-base font-normal">mm</span>
+                </h4>
+
+            </div>
+
+            <!-- Visibilité -->
+            <div class="border border-gray-300 rounded-xl p-4 bg-gray-50 hover:bg-gray-100 transition">
+
+                <p class="text-xs text-gray-500 mb-2">
+                    <i class="fas fa-eye"></i> Visibilité
+                </p>
+
+                <h4 class="text-3xl font-bold text-gray-800">
+                    <!-- {{ weatherInfo.weather.visibility || '--' }} -->
+                      2
+                    <span class="text-base font-normal">km</span>
+                </h4>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
+
+<div class="bg-white rounded-2xl shadow mt-4 overflow-hidden p-4">
+    <i class="fas fa-fire text-gray-500"></i>
+     <span class="text-sm font-medium text-gray-500 ml-2">
+        Indice de Risque Climatique
+    </span>
+   
+    <div class="flex justify-center">
+        <svg
+            width="140"
+            height="140"
+            viewBox="0 0 140 140">
+
+            <!-- fond -->
+
+            <circle
+                cx="70"
+                cy="70"
+                r="50"
+                fill="none"
+                stroke="#E5E7EB"
+                stroke-width="10">
+                
+            </circle>
+
+            <!-- progression -->
+
+            <circle
+                cx="70"
+                cy="70"
+                r="50"
+                fill="none"
+                [attr.stroke]=""
+                stroke-width="10"
+                stroke-linecap="round"
+                [attr.stroke-dasharray]="314"
+                [attr.stroke-dashoffset]="314 - (314 * 22 / 100)"
+                transform="rotate(-90 70 70)">
+            </circle>
+            <text
+                x="70"
+                y="75"
+                text-anchor="middle"
+                font-size="20"
+                font-weight="bold"
+                fill="#374151">
+                <!-- {{ risk.score }}% -->
+                  22%
+                
+            </text>
+        </svg>
+    </div>
+
+    <div class="flex justify-center mt-1">
+
+        <span class="px-4 py-2 rounded-full text-white text-sm font-medium" [style.backgroundColor]="">
+            <!-- {{ risk.label }} -->
+            risque faible
+        </span>
+        
+    </div>
+    
+</div>
+
+<!-- } -->
